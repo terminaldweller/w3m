@@ -1679,8 +1679,44 @@ static char *
 color_seq(int colmode)
 {
     static char seqbuf[32];
-    /* sprintf(seqbuf, "\033[%dm", ((colmode >> 8) & 7) + 30); */
-		sprintf(seqbuf, "\x1b[38;5;%dm", ((colmode >> 8) & 7) + 30);
+		 int color = ((colmode >> 8) & 7);
+		 switch(color)  {
+			case 1:
+				// WHITE
+				sprintf(seqbuf, "\x1b[38;5;23m");
+				break;
+			case 2:
+				// RED
+				sprintf(seqbuf, "\x1b[38;5;203m");
+				break;
+			case 3:
+				// GREEN
+				sprintf(seqbuf, "\x1b[38;5;28m");
+				break;
+			case 4:
+				// BLUE
+				sprintf(seqbuf, "\x1b[38;5;33m");
+				break;
+			case 5:
+				// 
+				sprintf(seqbuf, "\x1b[38;5;62m");
+				break;
+			case 6:
+				// CYAN
+				sprintf(seqbuf, "\x1b[38;5;37m");
+				break;
+			case 7:
+				sprintf(seqbuf, "\x1b[38;5;122m");
+				break;
+			default:
+				sprintf(seqbuf, "\033[%dm", ((colmode >> 8) & 7) + 30);
+		 }
+		 /* if (color == 1) { */
+			/* sprintf(seqbuf, "\x1b[38;5;23m"); */
+		 /* } else { */
+			/* sprintf(seqbuf, "\033[%dm", ((colmode >> 8) & 7) + 30); */
+		 /* } */
+		/* sprintf(seqbuf, "\x1b[38;5;%dm", ((colmode >> 8) & 7) + 22); */
     return seqbuf;
 }
 
